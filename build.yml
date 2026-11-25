@@ -1,0 +1,92 @@
+name: Build Satsiberau Audit Executable
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      version_label:
+        description: 'Version label for manual build'
+        required: false
+        default: 'manual-build'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    name: Build on Windows
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build executable
+        run: |
+          pyinstaller --onefile --uac-admin --name SatsiberauAudit `
+            --hidden-import=psutil `
+            --hidden-import=wmi `
+            --hidden-import=win32com.client `
+            --hidden-import=win32evtlog `
+            --hidden-import=win32security `
+            --hidden-import=win32api `
+            --hidden-import=winreg `
+            audit.py
+
+      - name: Verify build output
+        run: |
+          if (Test-Path dist/SatsiberauAudit.exe) {
+            Write-Host "Build successful" -ForegroundColor Green
+            Get-Item dist/SatsiberauAudit.exe | Select-Object Name, Length, LastWriteTime
+          } else {
+            Write-Error "Build failed - executable not found"
+            exit 1
+          }
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SatsiberauAudit-${{ github.ref_name }}
+          path: dist/SatsiberauAudit.exe
+          retention-days: 90
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/SatsiberauAudit.exe
+          generate_release_notes: true
+          body: |
+            ## Satsiberau Endpoint Audit ${{ github.ref_name }}
+
+            Lihat [CHANGELOG.md](./CHANGELOG.md) untuk detail perubahan.
+
+            ### Verifikasi Integrity
+            ```powershell
+            Get-FileHash .\SatsiberauAudit.exe -Algorithm SHA256
+            ```
+
+            ### Cara Pakai
+            1. Download `SatsiberauAudit.exe` dari assets di bawah
+            2. Klik kanan → **Run as Administrator**
+            3. Masukkan password
+            4. Tunggu scan selesai
+            5. Buka report HTML yang ter-generate
+
+            ### Dokumentasi
+            - [README](./README.md)
+            - [Blueprint v2.0](./docs/blueprint-v2.md)
+            - [Follina Mitigation Guide](./docs/follina-mitigation-guide.md)
+            - [Security Policy](./SECURITY.md)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

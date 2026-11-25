@@ -1,0 +1,21 @@
+# Satsiberau Endpoint Security Audit Tool
+# Python dependencies — Windows only
+#
+# Install via: pip install -r requirements.txt
+#
+# Tested with: Python 3.11, 3.12 on Windows 10/11 x64
+
+# === Core Dependencies ===
+psutil>=5.9.0          # Process enumeration, system info
+wmi>=1.5.1             # Windows Management Instrumentation queries
+pywin32>=306           # Windows API bindings (win32api, win32com, win32evtlog, win32security)
+
+# === Build Dependencies (optional, hanya untuk build .exe) ===
+# Uncomment baris di bawah kalau mau build executable:
+# pyinstaller>=6.0.0
+
+# === Notes ===
+# - Tool ini TIDAK memerlukan koneksi internet saat runtime
+# - Dependencies di atas hanya diperlukan saat development & build
+# - Executable hasil PyInstaller sudah bundle semua dependencies
+# - Jangan tambahkan dependency yang memerlukan network call runtime

@@ -1,0 +1,40 @@
+MIT License
+
+Copyright (c) 2026 Lettu Lek Ahmad Fauzan Langga, S.T.
+Satuan Siber TNI Angkatan Udara (Satsiberau)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+Attribution to "Satuan Siber TNI Angkatan Udara (Satsiberau)" is appreciated
+in derivative works and public deployments, but not required.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+ADDITIONAL NOTICE — DEFENSIVE USE ONLY:
+
+This software is intended exclusively for defensive security assessment on
+systems where the operator has explicit authorization to perform such audit.
+Unauthorized use against third-party systems may violate applicable laws,
+including (but not limited to):
+
+- Indonesia: UU ITE No. 11/2008 (sebagaimana diubah dengan UU No. 19/2016)
+- International: Computer Fraud and Abuse Act (CFAA, USA), GDPR (EU)
+
+The authors and contributors disclaim any responsibility for misuse of this
+tool for offensive, unauthorized, or illegal purposes.
